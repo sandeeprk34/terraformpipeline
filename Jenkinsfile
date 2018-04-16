@@ -1,32 +1,15 @@
-pipeline {
-    agent any
-    
+node {
+   stage 'checkout'
+        checkout scm
 
-     stages {
+   stage 'test'
+        parallel (
+            phase1: { sh "echo p1; sleep 20s; echo phase1" },
+            phase2: { sh "echo p2; sleep 40s; echo phase2" }
+        )
+   stage name: 'init', concurrency: 1
+        sh "terrsform init "
 
-        stage('terraform started') {
-            steps {
-                sh 'echo "Started...!" '
-            }
-        }
-        
-       
-        stage('terraform init') {
-            steps {
-                sh 'sudo terraform init'
-            }
-        }
-        stage('terraform plan') {
-            steps {
-                sh 'sudo terraform plan'
-            }
-        }
-        stage('terraform ended') {
-            steps {
-                sh 'echo "Ended....!!"'
-            }
-        }
-
-        
-    }
+   stage name: 'plan', concurrency: 1
+        sh "terraform plan --out plan"
 }
