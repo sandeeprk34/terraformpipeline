@@ -16,12 +16,12 @@ pipeline {
        
         stage('terraform init') {
             steps {
-                sh 'sudo terraform init'
+                sh 'terraform init'
             }
         }
         stage('terraform plan') {
             steps {
-                sh 'sudo terraform plan'
+                sh 'terraform plan'
             }
         }
         stage('terraform ended') {
