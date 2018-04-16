@@ -1,11 +1,8 @@
 pipeline {
-    agent {
-        node {
-            label 'master'
-        }
-    }
+    agent any
+    
 
-    stages {
+     stages {
 
         stage('terraform started') {
             steps {
