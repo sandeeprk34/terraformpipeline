@@ -8,7 +8,7 @@ node {
             phase2: { sh "echo p2; sleep 40s; echo phase2" }
         )
    stage name: 'init', concurrency: 1
-        sh "terrsform init "
+        sh "terraform init"
 
    stage name: 'plan', concurrency: 1
         sh "terraform plan --out plan"
