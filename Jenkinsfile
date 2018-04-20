@@ -16,7 +16,7 @@ node {
             id: 'Deploy',
             message: 'Let\'s continue the deploy plan',
             type: "boolean")
-	sh "terraform apply -input=true"
+	sh "terraform apply"
 
         
 }
