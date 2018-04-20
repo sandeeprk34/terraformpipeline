@@ -12,10 +12,7 @@ node {
         sh "terraform plan --out plan"
 
    stage name: 'Terraform Deploying Stage', concurrency: 1
-        def deploy_validation = input(
-            id: 'Deploy',
-            message: 'Let\'s continue the deploy plan',
-            type: "yes/no")
+        sh "terraform apply --input"
 
         sh "terraform apply"
 }
