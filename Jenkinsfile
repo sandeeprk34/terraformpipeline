@@ -14,14 +14,19 @@ pipeline {
         }
         
        
-        stage('terraform init') {
+        stage('terraform initialization stage') {
             steps {
                 sh 'terraform init'
             }
         }
-        stage('terraform plan') {
+        stage('terraform planning stage') {
             steps {
                 sh 'terraform plan'
+            }
+        }
+        stage('terraform applying stage') {
+            steps {
+                sh 'terraform apply'
             }
         }
         stage('terraform ended') {
