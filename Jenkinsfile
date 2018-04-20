@@ -15,7 +15,7 @@ node {
         def deploy_validation = input(
             id: 'Deploy',
             message: 'Let\'s continue the deploy plan',
-            type: "boolean")
+            type: "yes/no")
 
         sh "terraform apply"
 }
