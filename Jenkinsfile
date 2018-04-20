@@ -1,22 +1,40 @@
-node {
-   stage 'checkout'
-        checkout scm
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
 
-   stage 'Testing Stage'
-        parallel (
-            phase1: { sh "echo p1; sleep 20s; echo phase1" },
-            phase2: { sh "echo p2; sleep 40s; echo phase2" }
-        )
-		 
-   stage name: 'Terraform Planning Stage', concurrency: 1
-        sh "terraform plan --out plan"
+    stages {
 
-   stage name: 'Terraform Deploying Stage', concurrency: 1
-        def deploy_validation = input(
-            id: 'Deploy',
-            message: 'Let\'s continue the deploy plan',
-            type: "boolean")
-	sh "terraform apply"
+        stage('Terraform Starting Stage') {
+            steps {
+                sh 'echo "Started...!" '
+            }
+        }
+        
+       
+        stage('Terraform Initialization Stage') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform Planning Stage') {
+            steps {
+                sh 'terraform plan'
+            }
+        }
+        stage('Terraform Applying Stage') {
+            steps {
+                sh 'terraform apply -auto-approve'
+            }
+        }
+        stage('Terraform Ended') {
+            steps {
+                sh 'echo "Ended....!!"'
+            }
+        }
 
         
+    }
 }
