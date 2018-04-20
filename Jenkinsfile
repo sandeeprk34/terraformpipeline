@@ -7,26 +7,26 @@ pipeline {
 
     stages {
 
-        stage('terraform started') {
+        stage('Terraform Starting Stage') {
             steps {
                 sh 'echo "Started...!" '
             }
         }
         
        
-        stage('terraform initialization stage') {
+        stage('Terraform Initialization Stage') {
             steps {
                 sh 'terraform init'
             }
         }
-        stage('terraform planning stage') {
+        stage('Terraform Planning Stage') {
             steps {
                 sh 'terraform plan'
             }
         }
-        stage('terraform applying stage') {
+        stage('Terraform Applying Stage') {
             steps {
-                sh 'terraform apply -auto-approve'
+                sh 'terraform apply -input=true'
             }
         }
         stage('terraform ended') {
