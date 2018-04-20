@@ -16,7 +16,10 @@ pipeline {
        
         stage('terraform init') {
             steps {
-                sh 'terraform init'
+                sh 'which terraform'
+                 sh 'whoami'
+                 sh 'pwd'
+                 sh 'terraform init'
             }
         }
         stage('terraform plan') {
