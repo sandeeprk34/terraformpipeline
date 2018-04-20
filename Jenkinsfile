@@ -14,5 +14,5 @@ node {
    stage name: 'Terraform Deploying Stage', concurrency: 1
         sh "terraform apply --input"
 
-        sh "terraform apply"
+        
 }
